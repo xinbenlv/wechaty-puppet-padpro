@@ -846,6 +846,20 @@ export class PadproGrpc extends EventEmitter {
   }
 
   /**
+   * Unfriend a contact
+   * @param contactId contact id
+   */
+  public async GrpcUnfriendContact (contactId: string) {
+    log.silly(PRE, `GrpcUnfriendContact(${contactId})`);
+    const contactOperationOption: GrpcContactOperationOption = {
+      bitVal: ContactOperationBitVal.RemoveFromContact,
+      cmdid: ContactOperationCmdId.Delete,
+      userId: contactId,
+    }
+    await this.GrpcContactOperation(contactOperationOption)
+  }
+
+  /**
    * Underlying function to do contact operations
    * @param option Contact operation option
    */
